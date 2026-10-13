@@ -11,29 +11,28 @@ namespace CreatingTestFile1
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            try
+            if (txtInput.Text == null || txtInput.Text == "")
+            {
+                MessageBox.Show("Error. Please Input a value");
+            }
+            else
             {
                 string getInput = txtInput.Text + ".txt";
                 FrmFileName.ShowDialog();
 
                 string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                 using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, FrmFileName.SetFileName)))
-                {
-                    outputFile.WriteLine("Student No.: " + fr.studentno +
-                        "\n" + "Full Name: " + fr.name +
-                        "\n" + "Program: " + fr.program +
-                        "\n" + "Gender: " + fr.gender +
-                        "\n" + "Age: " + fr.age +
-                        "\n" + "Birthday: " + fr.dateofbirth +
-                        "\n" + "Contact Number: " + fr.contactnumber);
-                }
+            {
+                outputFile.WriteLine("Student No.: " + fr.studentno +
+                    "\n" + "Full Name: " + fr.name +
+                    "\n" + "Program: " + fr.program +
+                    "\n" + "Gender: " + fr.gender +
+                    "\n" + "Age: " + fr.age +
+                    "\n" + "Birthday: " + fr.dateofbirth +
+                    "\n" + "Contact Number: " + fr.contactnumber);
+            }
                 this.Close();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error occured. Please insert a text File" + ex);
-            }
-            
         }
     }
 }
