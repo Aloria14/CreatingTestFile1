@@ -51,7 +51,7 @@ namespace CreatingTestFile1
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error Encountered: " + ex.Message);
+                MessageBox.Show("An Error Occured" + ex);
             }
             finally
             {
