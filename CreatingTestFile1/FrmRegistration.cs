@@ -25,39 +25,54 @@ namespace CreatingTestFile1
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
-
-
             try
             {
                 name = txtFirstName.Text + " " + txtLastName.Text + " " + txtMiddleName.Text;
                 age = txtAge.Text;
-                gender = cbGender.SelectedItem?.ToString();
-                program = cbProgram.SelectedItem?.ToString();
                 studentno = Convert.ToInt64(txtStudentNo.Text);
                 age1 = int.Parse(txtAge.Text);
                 dateofbirth = dateBirthdayPicker.Value;
                 contactnumber = Convert.ToInt64(txtContactNo.Text);
-                FileStream stream = new FileStream(FrmFileName.SetFileName, FileMode.Create);
-                string message = "Student No.: " + studentno +
-                        "\n" + "Full Name: " + name +
-                        "\n" + "Program: " + program +
-                        "\n" + "Gender: " + gender +
-                        "\n" + "Age: " + age +
-                        "\n" + "Birthday: " + dateofbirth +
-                        "\n" + "Contact Number: " + contactnumber;
-
-                // Convert text into bytes
-                byte[] data = Encoding.UTF8.GetBytes(message);
-
-                // Write data to the file
-                stream.Write(data, 0, data.Length);
-
-                // Close the stream
-                stream.Close();
+        
+        
+                if (cbGender.SelectedItem?.ToString() == null || cbProgram.SelectedItem?.ToString() == null)
+                {
+                    MessageBox.Show("Please select a gender and program.");
+                    return;
+                }
+                else if (name == "" || age == "" || studentno == 0 || contactnumber == 0)
+                {
+                    MessageBox.Show("Please fill all the name fields.");
+                    return;
+                }
+                else
+                {
+                    FileStream stream = new FileStream(FrmFileName.SetFileName, FileMode.Create);
+                    string message = "Student No.: " + studentno +
+                            "\n" + "Full Name: " + name +
+                            "\n" + "Program: " + cbProgram.SelectedItem?.ToString() +
+                            "\n" + "Gender: " + cbGender.SelectedItem?.ToString() +
+                            "\n" + "Age: " + age +
+                            "\n" + "Birthday: " + dateofbirth +
+                            "\n" + "Contact Number: " + contactnumber;
+        
+                    // Convert text into bytes
+                    byte[] data = Encoding.UTF8.GetBytes(message);
+        
+                    // Write data to the file
+                    stream.Write(data, 0, data.Length);
+        
+                    // Close the stream
+                    stream.Close();
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Please Input All Fields");
+                MessageBox.Show("Please Input All Fields" + ex);
+            }
+            finally
+            {
+            
             }
         }
     }
