@@ -23,38 +23,27 @@ namespace CreatingTestFile1
         private void btnOkay_Click(object sender, EventArgs e)
         {
             SetFileName = txtFileName.Text + ".txt";
-            try
+            if (txtFileName.Text == null || txtFileName.Text == "")
             {
-                if (SetFileName == "")
-                {
-                    MessageBox.Show("Error. Please Input a value");
-                }
-                else
-                {
-                    FileStream stream = new FileStream(SetFileName, FileMode.Create);
-                    string message = "This is a test file.";
-
-                    // Convert text into bytes
-                    byte[] data = Encoding.UTF8.GetBytes(message);
-
-                    // Write data to the file
-                    stream.Write(data, 0, data.Length);
-
-                    // Close the stream
-                    stream.Close();
-
-                    //MessageBox.Show("File created successfully!");
-                    FrmRegistration fr = new FrmRegistration();
-                    fr.Show();
-
-                }
+                MessageBox.Show("Error. Please Input a value");
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("An Error Occured" + ex);
-            }
-            finally
-            {
+                FileStream stream = new FileStream(SetFileName, FileMode.Create);
+                string message = "This is a test file.";
+
+                // Convert text into bytes
+                byte[] data = Encoding.UTF8.GetBytes(message);
+
+                // Write data to the file
+                stream.Write(data, 0, data.Length);
+
+                // Close the stream
+                stream.Close();
+
+                //MessageBox.Show("File created successfully!");
+                FrmRegistration fr = new FrmRegistration();
+                fr.Show();
             }
         }
     }
